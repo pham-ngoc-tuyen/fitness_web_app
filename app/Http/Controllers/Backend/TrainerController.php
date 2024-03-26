@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class EmployeeController extends Controller
+class TrainerController extends Controller
 {
     public function __construct(){
 
@@ -13,8 +13,7 @@ class EmployeeController extends Controller
 
     public function index(){
         $config = $this ->config();
-            
-        $template = 'backend.employee.index';
+        $template = 'backend.trainer.index';
         return view('backend.dashboard.layout',compact(
             'template',
             'config'
