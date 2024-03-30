@@ -33,95 +33,79 @@
                 </div>
             </div>
             <div class="ibox-content">
-                <div class="filter">
-                    <div class="perpage">
-                        <div class="uk-flex uk-flex-middle uk-flex-space-between  ">
-                            <select name="perpage" class="form-control input sm perpage filter mr10">
-                                @for($i = 20; $i <= 200; $i++)
-                                <option value="{{$i}}">{{$i}} bảng ghi</option>
-                                @endfor
-                            </select>
-                            <div class="action">
-                                    <div class="uk-search uk-flex uk-flex-middle mr10 ">
-                                        <div class="input-group">
-                                            <input type="text"
-                                                    name="keyword"
-                                                    value=""
-                                                    placeholder="Nhập từ khóa để tìm tiếm"
-                                                    class="form-control">
-                                            <span class="input-group-btn">
-                                                <button type="submit"
-                                                        name="search"
-                                                        value="search"
-                                                        class="btn btn-primary mb0 btn-sm"> Tìm kiếm
-                                                </button>  
-                                            </span>      
-                                        </div>
-                                </div>
+                <div class="filter uk-flex uk-flex-space-between">
+                    <div class="uk-flex uk-flex-middle">
+                        <div class="perpage">
+                            <div class="uk-flex uk-flex-middle">
+                                <select name="perpage" class="form-control input sm perpage filter mr10">
+                                    @for($i = 20; $i <= 200; $i+=20)
+                                    <option value="{{$i}}">{{$i}} bảng ghi</option>
+                                    @endfor
+                                </select>
                             </div>
                         </div>
                     </div>
+                    <div class="action">
+                        <div  class="uk-search uk-flex uk-flex-middle mr10">
+                            <div  class="input-group">
+                                <input  style="margin-right: 32px"
+                                        type="text"
+                                        name="keyword"
+                                        value=""
+                                        placeholder="Nhập từ khóa để tìm kiếm"
+                                        class="form-control">
+                                <span  class="input-group-btn">
+                                    <button style="margin-right: 10px"
+                                            type="submit"
+                                            name="search"
+                                            value="search"
+                                            class="btn btn-primary mb0 btn-sm"> <i class="fa fa-search"></i> Tìm kiếm
+                                    </button>  
+                                </span>      
+                            </div>
+                            <a href="" class="btn btn-danger"><i class="fa fa-plus"></i> Thêm mới</a>
+                        </div>
+                    </div>
                 </div>
-                <table class="table table-striped table-bordered">
-                    <thead>
-                    <tr>
-                        <th>
-                            <input type="checkbox" name="" id="checkAll" class="input-checkbox">
-                        </th>
-                        <th style="width: 90px">Avatar</th>
-                        <th>Họ</th>
-                        <th>Tên</th>
-                        <th>SDT</th>
-                        <th>Ngày Sinh</th>
-                        <th>Email</th>
-                        <th>Địa chỉ</th>
-                        <th class="text-center">Tình trạng</th>
-                        <th class="text-center">Thao tác</th>
-                        
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td><input type="checkbox" name="" class="input-checkbox checkBoxItem"></td>
-                        <td><img class="avatar avatar-cover" src="https://top10dienbien.com/wp-content/uploads/2022/10/avatar-cute-9.jpg" alt=""></img></td>
-
-                        <td>
-                            Phạm Ngọc
-                        </td>
-                        <td>
-                            Tuyển
-                        </td>
-                        <td>
-                            0363047409
-                        </td>
-                        <td>
-                            27-03-2002
-                        </td>
-                        <td>
-                            pnt22497@gmail.com
-                        </td>
-                        <td>
-                            thôn Nước Ngọt, xã Cam Lập, Cam Ranh, Khánh Hòa
-                        </td>
-                        <td class="text-center"> 
-                            <input type="checkbox" class="js-switch" checked />
-                        </td>
-                        <td class="text-center"> 
-                            <a href="" class="btn btn-success"><i class="fa fa-edit"></i></a>
-                            <a href="" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" name="" id="checkAll" class="input-checkbox">
+                                </th>
+                                <th style="width: 90px">Avatar</th>
+                                <th>Họ</th>
+                                <th>Tên</th>
+                                <th>SDT</th>
+                                <th>Ngày Sinh</th>
+                                <th>Email</th>
+                                <th>Địa chỉ</th>
+                                <th class="text-center">Tình trạng</th>
+                                <th class="text-center">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox" name="" class="input-checkbox checkBoxItem"></td>
+                                <td><img class="avatar avatar-cover" src="https://top10dienbien.com/wp-content/uploads/2022/10/avatar-cute-9.jpg" alt=""></td>
+                                <td>Phạm Ngọc</td>
+                                <td>Tuyển</td>
+                                <td>0363047409</td>
+                                <td>27-03-2002</td>
+                                <td>pnt22497@gmail.com</td>
+                                <td>thôn Nước Ngọt, xã Cam Lập, Cam Ranh, Khánh Hòa</td>
+                                <td class="text-center"><input type="checkbox" class="js-switch" checked></td>
+                                <td class="text-center">
+                                    <a href="" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                                    <a href="" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+            
         </div>
     </div>
 </div>
-<script>
-
-    $(document).ready(function(){
-        var elem = document.querySelector('.js-switch');
-        var switchery = new Switchery(elem, { color: '#1AB394' });
-    })
-
-</script>
