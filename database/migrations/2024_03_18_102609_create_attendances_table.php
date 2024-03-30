@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -18,7 +19,6 @@ return new class extends Migration
             $table->unsignedBigInteger('class_session_id');
             $table->date('attendance_date');
             
-            $table->foreign('member_id')->references('member_id')->on('learns');
             $table->foreign('class_id')->references('class_id')->on('class_session_classes');
             $table->foreign('class_session_id')->references('class_session_id')->on('class_session_classes');
             $table->timestamps();

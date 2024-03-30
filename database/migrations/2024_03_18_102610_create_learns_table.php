@@ -13,15 +13,14 @@ return new class extends Migration
     {
         Schema::create('learns', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('member_id');
-            $table->unsignedBigInteger('classes_id');
+            $table->unsignedBigInteger('attendances_id');
             $table->date('registrater_date');
             $table->date('start_date');
             $table->date('end_date');
             $table->decimal('amount',8,2);
 
-            $table->foreign('member_id')->references('id')->on('members');
-            $table->foreign('classes_id')->references('id')->on('classes');
+            $table->foreign('attendances_id')->references('id')->on('attendances');
+
             $table->timestamps();
         });
     }

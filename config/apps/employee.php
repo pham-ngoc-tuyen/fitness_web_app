@@ -1,7 +1,7 @@
 <?php
 
 return[
-    'title' => 'Quản lí người dùng',
-    'tableHeading' => 'Danh sách người dùng'
+    'title' => 'Quản lí nhân viên',
+    'tableHeading' => 'Danh sách nhân viên'
 ];
 

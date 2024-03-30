@@ -1,11 +1,11 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-8">
-        <h2>{{config('apps.trainer.title')}}</h2>
+        <h2>{{config('apps.member.title')}}</h2>
         <ol class="breadcrumb" style="margin-bottom:10px;">
             <li>
                 <a href="{{route('dashboard.index') }}">dashboard</a>
             </li>
-            <li class="active"><strong>{{config('apps.trainer.title')}}</strong></li>
+            <li class="active"><strong>{{config('apps.member.title')}}</strong></li>
         </ol>
     </div>
 </div>
@@ -13,7 +13,7 @@
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>{{config('apps.trainer.tableHeading')}}</h5>
+                <h5>{{config('apps.member.tableHeading')}}</h5>
                 <div class="ibox-tools">
                     <a class="collapse-link">
                         <i class="fa fa-chevron-up"></i>
@@ -33,6 +33,43 @@
                 </div>
             </div>
             <div class="ibox-content">
+                <div class="filter">
+                    <div class="perpage">
+                        <div class="uk-flex uk-flex-middle uk-flex-space-between  ">
+                            <select name="perpage" class="form-control input sm perpage filter mr10">
+                                @for($i = 20; $i <= 200; $i++)
+                                <option value="{{$i}}">{{$i}} bảng ghi</option>
+                                @endfor
+                            </select>
+                            <div class="action">
+                                <div class="uk-flex-middle uk-flex">
+                                    <select name="member_catalog_id" class="form-control mr10">
+                                        <option value="0" selected="selected">Chọn Nhóm Thành Viên</option>
+                                        <option value="1" >Nhân Viên</option>
+                                        <option value="2" >Huấn Luyện Viên</option>
+                                        <option value="3" >Học Viên</option>
+                                    </select>   
+                                    <div class="uk-search uk-flex uk-flex-middle mr10 ">
+                                        <div class="input-group">
+                                            <input type="text"
+                                                    name="keyword"
+                                                    value=""
+                                                    placeholder="Nhập từ khóa để tìm tiếm"
+                                                    class="form-control">
+                                            <span class="input-group-btn">
+                                                <button type="submit"
+                                                        name="search"
+                                                        value="search"
+                                                        class="btn btn-primary mb0 btn-sm"> Tìm kiếm
+                                                </button>  
+                                            </span>      
+                                        </div>
+                                    </div>     
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <table class="table table-striped table-bordered">
                     <thead>
                     <tr>
@@ -46,9 +83,8 @@
                         <th>Ngày Sinh</th>
                         <th>Email</th>
                         <th>Địa chỉ</th>
-                        <th>Chuyên môn</th>
-                        <th>Tình trạng</th>
-                        <th>Thao tác</th>
+                        <th class="text-center">Tình trạng</th>
+                        <th class="text-center">Thao tác</th>
                         
                     </tr>
                     </thead>
@@ -56,6 +92,7 @@
                     <tr>
                         <td><input type="checkbox" name="" class="input-checkbox checkBoxItem"></td>
                         <td><img class="avatar avatar-cover" src="https://top10dienbien.com/wp-content/uploads/2022/10/avatar-cute-9.jpg" alt=""></img></td>
+
                         <td>
                             Phạm Ngọc
                         </td>
@@ -74,9 +111,6 @@
                         <td>
                             thôn Nước Ngọt, xã Cam Lập, Cam Ranh, Khánh Hòa
                         </td>
-                        <td>
-                            Yoga
-                        </td>
                         <td class="text-center"> 
                             <input type="checkbox" class="js-switch" checked />
                         </td>
@@ -90,7 +124,7 @@
             </div>
         </div>
     </div>
-</div>  
+</div>
 <script>
 
     $(document).ready(function(){
