@@ -1,7 +1,12 @@
 <?php
 
 return[
-    'title' => 'Quản lí nhân viên',
+    'index'=>[
+        'title' => 'Quản lí nhân viên',
     'tableHeading' => 'Danh sách nhân viên'
+    ],
+    'create'=>[
+        'title' => 'Thêm mớinhân viên',
+    ]
 ];
 

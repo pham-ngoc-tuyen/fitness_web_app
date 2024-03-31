@@ -63,7 +63,7 @@
                                     </button>  
                                 </span>      
                             </div>
-                            <a href="" class="btn btn-danger"><i class="fa fa-plus"></i> Thêm mới</a>
+                            <a href="{{route('employee.create')}}" class="btn btn-danger"><i class="fa fa-plus"></i> Thêm mới</a>
                         </div>
                     </div>
                 </div>
@@ -86,8 +86,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if(isset($employee) && is_object($employee))
-                                @foreach ($employee as $employee)
+                            @if(isset($employees) && is_object($employees))
+                                @foreach ($employees as $employee)
                                 <tr>
                                     <td><input type="checkbox" name="" class="input-checkbox checkBoxItem"></td>
                                     <td><img class="avatar avatar-cover" src="https://top10dienbien.com/wp-content/uploads/2022/10/avatar-cute-9.jpg" alt=""></td>
@@ -110,7 +110,7 @@
                                         {{$employee->address}}
                                     </td>
                                     <td class="text-center"><input type="checkbox" class="js-switch" checked></td>
-                                    <td class="text-center">
+                                    <td class="text-center" style="width: 100px">
                                         <a href="" class="btn btn-success"><i class="fa fa-edit"></i></a>
                                         <a href="" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                     </td>
@@ -119,6 +119,7 @@
                             @endif
                         </tbody>
                     </table>
+                        {{ $employees->links('pagination::bootstrap-4') }}
                 </div>
             </div>
             

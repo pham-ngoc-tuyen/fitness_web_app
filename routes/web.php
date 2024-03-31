@@ -26,8 +26,13 @@ Route::get('dashboard/index', [DashboardController::class, 'index'])->name('dash
 ->middleware('admin');
 
                 /** employee */
-Route::get('employee/index', [EmployeeController::class, 'index'])->name('employee.index')
-->middleware('admin');
+Route::group(['prefix => employee'],function(){
+    Route::get('index', [EmployeeController::class, 'index'])->name('employee.index')
+    ->middleware('admin');
+    
+    Route::get('create', [EmployeeController::class, 'create'])->name('employee.create')
+    ->middleware('admin');
+});
                 /** trainer */
 Route::get('trainer/index', [TrainerController::class, 'index'])->name('trainer.index')
 ->middleware('admin');    

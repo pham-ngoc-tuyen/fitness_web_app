@@ -18,14 +18,14 @@ class EmployeeFactory extends Factory
     public function definition(): array
     {
         return [
-            'first_name' => fake()->name(),
-            'last_name' => fake()->name(),
-            'phone_number' => fake()->phone_number,
-            'day_of_birth' => fake()->name(),
-            'gender' => fake()->name(),
-            'address' => fake()->address,
-            'email' => fake()->unique()->safeEmail(),
-            'account_id' => fake()->name(),
+            'first_name' => $this->faker->name(),
+            'last_name' => $this->faker->name(),
+            'phone_number' => $this->faker->phoneNumber(),
+            'gender' => $this->faker->randomElement([0, 1]),
+            'day_of_birth' => $this->faker->date(),
+            'address' => $this->faker->address(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'account_id' => $this->faker->name(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             //'remember_token' => Str::random(10),
