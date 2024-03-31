@@ -60,7 +60,7 @@ return [
     */
 
     'providers' => [
-        'employees' => [
+        'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\Employee::class,
         ],

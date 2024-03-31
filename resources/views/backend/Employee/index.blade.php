@@ -86,21 +86,37 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><input type="checkbox" name="" class="input-checkbox checkBoxItem"></td>
-                                <td><img class="avatar avatar-cover" src="https://top10dienbien.com/wp-content/uploads/2022/10/avatar-cute-9.jpg" alt=""></td>
-                                <td>Phạm Ngọc</td>
-                                <td>Tuyển</td>
-                                <td>0363047409</td>
-                                <td>27-03-2002</td>
-                                <td>pnt22497@gmail.com</td>
-                                <td>thôn Nước Ngọt, xã Cam Lập, Cam Ranh, Khánh Hòa</td>
-                                <td class="text-center"><input type="checkbox" class="js-switch" checked></td>
-                                <td class="text-center">
-                                    <a href="" class="btn btn-success"><i class="fa fa-edit"></i></a>
-                                    <a href="" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                                </td>
-                            </tr>
+                            @if(isset($employee) && is_object($employee))
+                                @foreach ($employee as $employee)
+                                <tr>
+                                    <td><input type="checkbox" name="" class="input-checkbox checkBoxItem"></td>
+                                    <td><img class="avatar avatar-cover" src="https://top10dienbien.com/wp-content/uploads/2022/10/avatar-cute-9.jpg" alt=""></td>
+                                    <td>
+                                        {{$employee->first_name}}
+                                    </td>
+                                    <td>
+                                        {{$employee->last_name}}
+                                    </td>
+                                    <td>
+                                        {{$employee->phone_number}}
+                                    </td>
+                                    <td>
+                                        {{$employee->day_of_birth}}
+                                    </td>
+                                    <td> 
+                                        {{$employee->email}}
+                                    </td>
+                                    <td>
+                                        {{$employee->address}}
+                                    </td>
+                                    <td class="text-center"><input type="checkbox" class="js-switch" checked></td>
+                                    <td class="text-center">
+                                        <a href="" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                                        <a href="" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>
