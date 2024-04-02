@@ -9,7 +9,7 @@
     <title>Admin</title>
 
     <link href="/backend/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/backendfont-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/backend/font-awesome/css/font-awesome.css" rel="stylesheet">
 
     <link href="/backend/css/animate.css" rel="stylesheet">
     <link href="/backend/css/style.css" rel="stylesheet">
@@ -23,10 +23,12 @@
         <div class="row">
 
             <div class="col-md-6">
-                <h2 class="font-bold">Welcome to IN+</h2>
+                <h2 class="font-bold">Welcome to Fitness Project</h2>
 
                 <p>
-                    Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.
+                   <img src="https://t4.ftcdn.net/jpg/04/15/32/43/360_F_415324398_W9kQKIx3xp1tH5p7RXQNChtATIH1Szyp.jpg" 
+                   style="width: 50%; text-align-certer"
+                   alt="">
                 </p>
 
                 <p>

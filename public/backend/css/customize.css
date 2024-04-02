@@ -73,3 +73,44 @@ table strong{
 .mr10{
     margin-right: 10px;
 }
+.mb15{
+    margin-bottom: 15px;
+}
+.box .ibox{
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
+}
+.panel-title{   
+    font-size: 20px;
+    margin-bottom: 15px;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+.panel-description{
+    font-size: 15px;
+}
+.select2-container--default .select2-selection--single{
+    border-radius: 0 !important;
+  }
+  .select2-container .select2-selection--single{
+    height: 31  px !important;
+    -webkit-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+    -webkit-transition-property: color, -webkit-box-shadow;
+    transition-property: color, -webkit-box-shadow;
+    transition-property: box-shadow, color;
+    transition-property: box-shadow, color, -webkit-box-shadow;
+    -webkit-box-shadow: inset 0 1px 0 rgba(63, .63, .68, .05) ; 
+    box-shadow: inset 0 1px 0 rgba(63, .63, .68, .05);
+    border: 1px solid #c4cdd5;
+    outline: none;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#f9fafb));
+    background: linear-gradient(to bottom, #fff, #f9fafb);
+    border-color: #c4cdd5;
+  }
+  .select2-container--default .select2-selection--single .select2-selection__rendered{
+    font-size: 13px !important;
+    line-height: 31 px;
+  }
+  .form-control{
+    height:  31px;
+  }

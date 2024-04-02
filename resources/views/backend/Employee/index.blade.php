@@ -1,19 +1,9 @@
-<div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-8">
-        <h2>{{config('apps.employee.title')}}</h2>
-        <ol class="breadcrumb" style="margin-bottom:10px;">
-            <li>
-                <a href="{{route('dashboard.index') }}">dashboard</a>
-            </li>
-            <li class="active"><strong>{{config('apps.employee.title')}}</strong></li>
-        </ol>
-    </div>
-</div>
+@include('backend.dashboard.component.breadcumb', ['title' => $config['seo']['index']['title']])
 <div class="row mt20">
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>{{config('apps.employee.tableHeading')}}</h5>
+                <h5>{{$config['seo']['index']['table'];}}</h5>
                 <div class="ibox-tools">
                     <a class="collapse-link">
                         <i class="fa fa-chevron-up"></i>
@@ -48,7 +38,7 @@
                     <div class="action">
                         <div  class="uk-search uk-flex uk-flex-middle mr10">
                             <div  class="input-group">
-                                <input  style="margin-right: 32px"
+                                <input 
                                         type="text"
                                         name="keyword"
                                         value=""

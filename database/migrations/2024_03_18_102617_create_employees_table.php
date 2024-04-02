@@ -17,11 +17,14 @@ return new class extends Migration
             $table->string('last_name')->nullable();
             $table->tinyInteger('gender')->nullable();
             $table->dateTime('day_of_birth')->nullable();
+            $table->string('province_id')->nullable();
+            $table->string('district_id')->nullable();
+            $table->string('ward_id')->nullable();
+            $table->string('address')->nullable();
+
             $table->string('avatar')->nullable();
             $table->string('phone_number',20)->nullable();
             $table->string('email')->unique();
-            $table->string('account_id');
-            $table->string('address')->nullable();
             $table->string('password');
             $table->string('rememberToken')->nullable();
             $table->timestamp('email_verified_at')->nullable();

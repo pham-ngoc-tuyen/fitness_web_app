@@ -20,8 +20,10 @@ return new class extends Migration
             $table->string('avatar')->nullable();
             $table->string('phone_number',20)->nullable();
             $table->string('email')->unique();
-            $table->string('account_id');
             $table->string('specialize')->nullable();
+            $table->string('province_id')->nullable();
+            $table->string('district_id')->nullable();
+            $table->string('ward_id')->nullable();
             $table->string('address')->nullable();
             $table->string('password');
             $table->string('rememberToken');

@@ -26,6 +26,9 @@ class Employee extends Authenticatable
         'phone_number',
         'email',
         'password',
+        'province_id',
+        'district_id',
+        'ward_id',
         'address',
     ];
 
