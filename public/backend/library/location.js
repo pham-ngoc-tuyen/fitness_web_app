@@ -5,15 +5,15 @@
     Uc.province = () =>{
        $(document).on('change','.province',
        function(){
-            let _this = ($this)
+            let _this = $(this)
             let province_id = _this.val()
             $.ajax(
                 {
                     url:'ajax/location/getLocation',
                     type: 'GET',
                     dataType: 'json',
-                    success: function(data){
-                        $('#result').html(data);
+                    success: function(res){
+                        console.log(res)
                     },
                     error: function(jqXHR, textStatus, errorThrown){
                         console.log('Lỗi' + textStatus + ' ' + errorThrown);

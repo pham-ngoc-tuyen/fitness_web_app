@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\EmployeeController;
 use App\Http\Controllers\Backend\TrainerController;
 use App\Http\Controllers\Backend\MemberController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Ajax\LocationController;
 use App\Models\Employee;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,10 @@ Route::get('trainer/index', [TrainerController::class, 'index'])->name('trainer.
                 /**member  */
 Route::get('member/index', [MemberController::class, 'index'])->name('member.index')
 ->middleware('admin');    
+
+                /**Ajax  */
+Route::get('ajax/location/getLocation', [LocationController::class, 'getLocation'])->name('ajax.index')
+->middleware('admin');
 
 Route::get('admin', [AuthController::class, 'index'])->name('auth.admin');
 Route::get('logout', [AuthController::class, 'logout'])->name('auth.logout');
