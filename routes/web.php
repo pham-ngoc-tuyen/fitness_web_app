@@ -27,7 +27,7 @@ Route::get('dashboard/index', [DashboardController::class, 'index'])->name('dash
 ->middleware('admin');
 
                 /** employee */
-Route::group(['prefix => employee'],function(){
+Route::group(['prefix' => 'employee'],function(){
     Route::get('index', [EmployeeController::class, 'index'])->name('employee.index')
     ->middleware('admin');
     

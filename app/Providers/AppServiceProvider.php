@@ -11,8 +11,9 @@ class AppServiceProvider extends ServiceProvider
      * Register any application services.
      */
     public $bindings = [
-        'App\Respositories\Interface\ProvinceRespositoriesInterface' =>
-        'App\Respositories\ProvinceRespositories',
+        'App\Repositories\Interfaces\ProvinceRepositoriesInterface' => 'App\Repositories\ProvinceRepositories',
+        'App\Repositories\Interfaces\DistrictRepositoriesInterface' => 'App\Repositories\DistrictRepositories',
+        'App\Repositories\Interfaces\BaseRepositoriesInterface' => 'App\Repositories\BaseRepositories',
     ];
     public function register(): void
     {

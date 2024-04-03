@@ -11,9 +11,12 @@
                 {
                     url:'ajax/location/getLocation',
                     type: 'GET',
+                    data: {
+                        'province_id' : province_id,
+                    },
                     dataType: 'json',
                     success: function(res){
-                        console.log(res)
+                        $('.districts').html(res.html)
                     },
                     error: function(jqXHR, textStatus, errorThrown){
                         console.log('Lỗi' + textStatus + ' ' + errorThrown);

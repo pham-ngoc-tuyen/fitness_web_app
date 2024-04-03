@@ -113,15 +113,16 @@
                                 <div class="form-row">
                                     <label class="control-label text-Left">Giới tính <span class="text-danger">(*)</span></label>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="gender" id="male" value="male">
+                                        <input class="form-check-input" type="radio" name="gender" id="male" value="male">
                                         <label class="form-check-label" for="male">Nam</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="gender" id="female" value="female">
+                                        <input class="form-check-input" type="radio" name="gender" id="female" value="female">
                                         <label class="form-check-label" for="female">Nữ</label>
                                     </div>
                                 </div>
                             </div>
+                            
                         </div>
                         <div class="row mb15">
                             <div class="col-lg-12">
@@ -174,7 +175,7 @@
                                 <div class="form-row">
                                     <label for="" class="control-label text-Left">Quận/Huyện
                                     </label>
-                                    <Select name="district_id" class="form-control">
+                                    <Select name="district_id" class="form-control districts setupSelect2">
                                         <option value="0">[Chọn Quận/Huyện]</option>
                                    </Select>
                                 </div>
