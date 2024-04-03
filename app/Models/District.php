@@ -7,27 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class District extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'name',
     ];
     protected $table ='districts';
+    protected $primaryKey ='code';
+    public $incrementing =false;
+    public function provinces(){
+        return $this->belongsTo(Province::class, 'province_code','code');
+    }
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function wards()
+    {
+        return $this->hasMany(District::class, 'district_code', 'code');
+    }
 }

@@ -5,27 +5,42 @@ namespace App\Http\Controllers\Ajax;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\Interfaces\DistrictRepositoriesInterface as DistrictRepositories;
+use App\Repositories\Interfaces\ProvinceRepositoriesInterface as ProvinceRepositories;
 
 class LocationController extends Controller
 {
     protected $districtRepositories;
+    protected $provinceRepositories;
 
-    public function __construct(DistrictRepositories $districtRepositories)
+    public function __construct(
+        DistrictRepositories $districtRepositories,
+        ProvinceRepositories $provinceRepositories)
     {
         $this->districtRepositories = $districtRepositories;
+        $this->provinceRepositories = $provinceRepositories;
     }
 
     public function getLocation(Request $request)
         {
-            $province_id = $request->input('province_id');
-            $districts = $this->districtRepositories->findDistrictProvinceID($province_id); 
+            $get = $request->input();
+            $html = '   '; 
+            if($get['target'] == 'districts'){
+                $province = $this->provinceRepositories->findById($get['data'],['location_id'], 
+                ['code','name'],['districts']);
+                $html = $this->renderHtml( $province->districts);
+            }else if($get['target'] == 'wards'){
+                $district = $this->provinceRepositories->findById($get['data'],['location_id'], 
+                ['code','name'],['wards']);
+                $html = $this->renderHtml( $district->wards, '[Chọn Phường/Xã]');
+            }
+
             $response = [
-                'html' => $this->renderHtml($districts)
+                'html' => $html
             ];
             return response()->json($response); 
         }
-    public function renderHtml($districts ){
-        $html ='<option value="0">[Chọn Quận/Huyện]</option>';
+    public function renderHtml($districts, $root = '[Chọn Quận/Huyện]' ){
+        $html ='<option value="0">'.$root.'</option>';
         foreach ($districts as $district){
             $html .= '<option value="'.$district->code.'">'.$district->name.'</option>';
         }

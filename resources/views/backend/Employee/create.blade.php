@@ -160,7 +160,7 @@
                                 <div class="form-row">
                                     <label for="" class="control-label text-Left">Thành phố
                                     </label>
-                                   <Select name="provide_id" class="form-control setupSelect2 province">
+                                   <Select name="provide_id" class="form-control setupSelect2 province location" data-taget="districts">
                                         <option value="0">[Chọn thành phố]</option>
                                         @if (@isset($provinces))
                                             @foreach ($provinces as $province)
@@ -175,7 +175,7 @@
                                 <div class="form-row">
                                     <label for="" class="control-label text-Left">Quận/Huyện
                                     </label>
-                                    <Select name="district_id" class="form-control districts setupSelect2">
+                                    <Select name="district_id" class="form-control districts setupSelect2 location" data-taget="wards">
                                         <option value="0">[Chọn Quận/Huyện]</option>
                                    </Select>
                                 </div>
@@ -186,7 +186,7 @@
                                 <div class="form-row">
                                     <label for="" class="control-label text-Left">Phường/Xã
                                     </label>
-                                    <Select name="ward_id" class="form-control">
+                                    <Select name="ward_id" class="form-control setUpSelect2">
                                         <option value="0">[Chọn Phường/Xã]</option>
                                    </Select>
                                 </div>

@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Base;
 use App\Repositories\Interfaces\BaseRepositoriesInterface;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 
 class BaseRepositories implements BaseRepositoriesInterface{
@@ -16,5 +17,12 @@ class BaseRepositories implements BaseRepositoriesInterface{
     }
     public function all(){
         return $this->model->all();
+    }
+    public function findById(
+        int $modelId,
+        array $column = ['*'],
+        array $Relation = []
+        ){
+            return $this->model->select($column)->with($Relation)->findOrFail($modelId);
     }
 }
