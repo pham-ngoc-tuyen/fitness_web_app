@@ -69,6 +69,7 @@
                                 <th>Tên</th>
                                 <th>SDT</th>
                                 <th>Ngày Sinh</th>
+                                <th>Giới tính</th>
                                 <th>Email</th>
                                 <th>Địa chỉ</th>
                                 <th class="text-center">Tình trạng</th>
@@ -92,6 +93,9 @@
                                     </td>
                                     <td>
                                         {{$employee->day_of_birth}}
+                                    </td>
+                                    <td>
+                                        {{ $genderLabels[$employee->gender] }}
                                     </td>
                                     <td> 
                                         {{$employee->email}}

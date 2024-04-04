@@ -3,20 +3,22 @@
     var Uc = {};
 
     Uc.getLocation = () =>{
-       $(document).on('change', 'location' ,'.province',
+       $(document).on('change', '.location' ,'.province',
        function(){
+
                 let _this = $(this)
                 let option = {
                     'data' :{
                         'location_id': _this.val()
                     },
-                    'taget' : _this.attr('data-target') 
+                    'target' : _this.attr('data-target') 
                 }
                 Uc.sendDataLocation(option)
             }
        )
     }
     Uc.sendDataLocation = (option) => {
+
         $.ajax(
             {
                 url:'ajax/location/getLocation',

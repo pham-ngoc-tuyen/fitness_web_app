@@ -1,6 +1,17 @@
 @include('backend.dashboard.component.breadcumb', ['title' => $config['seo']['create']['title']])
 
-<form action="" method="" class="box">
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{$error}}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+<form action="{{route('employee.store')}}" method="post" class="box">
+    @csrf
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
             <div class="col-lg-5">
@@ -25,7 +36,7 @@
                                         type="text" 
                                         name="first_name" 
                                         class="form-control" 
-                                        value="" 
+                                        value="{{old('first_name')}}" 
                                         placeholder=""
                                         autocomplete="off"
                                     >
@@ -40,7 +51,7 @@
                                         type="text" 
                                         name="last_name" 
                                         class="form-control" 
-                                        value="" 
+                                        value="{{old('last_name')}}" 
                                         placeholder=""
                                         autocomplete="off"
                                     >
@@ -89,7 +100,7 @@
                                             type="email" 
                                             name="email" 
                                             class="form-control" 
-                                            value="" 
+                                            value="{{old('email')}}" 
                                             placeholder=""
                                             autocomplete="off"
                                         >
@@ -111,7 +122,7 @@
                             </div>
                             <div class="col-lg-2">
                                 <div class="form-row">
-                                    <label class="control-label text-Left">Giới tính <span class="text-danger">(*)</span></label>
+                                    <label class="control-label text-Left">Giới tính</label>
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="gender" id="male" value="male">
                                         <label class="form-check-label" for="male">Nam</label>
@@ -120,8 +131,13 @@
                                         <input class="form-check-input" type="radio" name="gender" id="female" value="female">
                                         <label class="form-check-label" for="female">Nữ</label>
                                     </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender" id="unknown" value="unknown">
+                                        <label class="form-check-label" for="unknown">Khác</label>
+                                    </div>
                                 </div>
                             </div>
+                            
                             
                         </div>
                         <div class="row mb15">
@@ -133,7 +149,7 @@
                                         type="text" 
                                         name="avatar" 
                                         class="form-control" 
-                                        value="" 
+                                        value="{{old('avatar')}}" 
                                         placeholder=""
                                         autocomplete="off"
                                     >
@@ -160,7 +176,7 @@
                                 <div class="form-row">
                                     <label for="" class="control-label text-Left">Thành phố
                                     </label>
-                                   <Select name="provide_id" class="form-control setupSelect2 province location" data-taget="districts">
+                                   <Select name="provide_id" class="form-control setupSelect2 province location" data-target="districts">
                                         <option value="0">[Chọn thành phố]</option>
                                         @if (@isset($provinces))
                                             @foreach ($provinces as $province)
@@ -175,7 +191,7 @@
                                 <div class="form-row">
                                     <label for="" class="control-label text-Left">Quận/Huyện
                                     </label>
-                                    <Select name="district_id" class="form-control districts setupSelect2 location" data-taget="wards">
+                                    <Select name="district_id" class="form-control districts setupSelect2 location" data-target="wards">
                                         <option value="0">[Chọn Quận/Huyện]</option>
                                    </Select>
                                 </div>
@@ -186,7 +202,7 @@
                                 <div class="form-row">
                                     <label for="" class="control-label text-Left">Phường/Xã
                                     </label>
-                                    <Select name="ward_id" class="form-control setUpSelect2">
+                                    <Select name="ward_id" class="form-control setupSelect2 wards">
                                         <option value="0">[Chọn Phường/Xã]</option>
                                    </Select>
                                 </div>
@@ -196,30 +212,36 @@
                                     <label for="" class="control-label text-Left">Địa chỉ
                                         <span class="text-danger">(*)</span>
                                     </label>
-                                    <Select name="address" class="form-control">
-                                        <option value="0">[Chọn Địa chỉ]</option>
-                                   </Select>
+                                    <input type="text" 
+                                            name="address"
+                                            value="{{old('address')}}"
+                                            class="form-control"
+                                            placeholder=""
+                                            autocomplete="off" 
+                                            >
                                 </div>
                             </div>
                         </div>
-                        <div class="row mb15">
-                            <div class="col-lg-6">
-                                <div class="form-row">
-                                    <label for="" class="control-label text-Left">Số điện thoại
-                                        <span class="text-danger">(*)</span>
-                                    </label>
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-row">
-                                    <label for="" class="control-label text-Left">Ghi chú
-                                        <span class="text-danger">(*)</span>
-                                    </label>
-                                    <input type="text" class="form-control">
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <div class="form-row d-inline-block">
+                                    <div style="display: flex; justify-content: center; align-items: flex-start;">
+                                        <label for="" class="control-label text-Left" style="margin-bottom: 5px;">Số điện thoại
+                                            <span class="text-danger">(*)</span>
+                                        </label>
+                                    </div>
+                                    <input type="text" 
+                                            name="phone_number"
+                                            value="{{old('phone_number')}}"
+                                            class="form-control"
+                                            placeholder=""
+                                            autocomplete="off" 
+                                            style="width: 50%; display: inline-block;"
+                                            >
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>

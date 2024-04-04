@@ -15,6 +15,10 @@ class BaseRepositories implements BaseRepositoriesInterface{
     ){
         $this->model = $model;
     }
+    public function create(array $payload =[]){
+        $model = $this->model->create($payload);
+        return $model->fresh();
+    }
     public function all(){
         return $this->model->all();
     }
@@ -24,5 +28,5 @@ class BaseRepositories implements BaseRepositoriesInterface{
         array $Relation = []
         ){
             return $this->model->select($column)->with($Relation)->findOrFail($modelId);
-    }
+}
 }
