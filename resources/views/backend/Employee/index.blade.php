@@ -95,7 +95,13 @@
                                         {{$employee->day_of_birth}}
                                     </td>
                                     <td>
-                                        {{ $genderLabels[$employee->gender] }}
+                                        @if($employee->gender == 0)
+                                            Nam
+                                        @elseif($employee->gender == 1)
+                                            Nữ
+                                        @else
+                                            Khác
+                                        @endif
                                     </td>
                                     <td> 
                                         {{$employee->email}}
@@ -105,7 +111,7 @@
                                     </td>
                                     <td class="text-center"><input type="checkbox" class="js-switch" checked></td>
                                     <td class="text-center" style="width: 100px">
-                                        <a href="" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                                        <a href="{{route('employee.edit', $employee->id)}}" class="btn btn-success"><i class="fa fa-edit"></i></a>
                                         <a href="" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>

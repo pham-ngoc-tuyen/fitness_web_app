@@ -34,7 +34,9 @@ Route::group(['prefix' => 'employee'],function(){
     Route::get('create', [EmployeeController::class, 'create'])->name('employee.create')
     ->middleware('admin');
 
-    Route::post('store', [EmployeeController::class, 'store'])->name('employee.store')
+    Route::post('save', [EmployeeController::class, 'save'])->name('employee.save')
+    ->middleware('admin');
+    Route::get('{id}\edit', [EmployeeController::class, 'edit'])->where(['id'=>'[0-9]+'])->name('employee.edit')
     ->middleware('admin');
 });
                 /** trainer */

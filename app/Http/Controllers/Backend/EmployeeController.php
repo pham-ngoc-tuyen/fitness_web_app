@@ -9,19 +9,23 @@ use App\Models\Employee;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Repositories\Interfaces\ProvinceRepositoriesInterface as ProvinceRepository;
+use App\Repositories\Interfaces\EmployeeRepositoriesInterface as EmployeeRepositories;
 use App\Services\Interfaces\EmployeeServiceInterface;
 
 class EmployeeController extends Controller
 {
     protected $employeeService;
+    protected $employeeRepositories;
 
     protected $provinceRepositories;
     public function __construct(
         EmployeeService $employeeService,
         ProvinceRepository $provinceRepositories,
+        EmployeeRepositories $employeeRepositories,
     ){
         $this->employeeService = $employeeService; 
         $this->provinceRepositories = $provinceRepositories; 
+        $this->employeeRepositories = $employeeRepositories; 
     }
     
 
@@ -39,16 +43,11 @@ class EmployeeController extends Controller
         
         $config['seo'] = config('apps.employee');
         $template = 'backend.employee.index';
-        $genderLabels = [
-            0 => 'Nam',
-            1 => 'Nữ',
-            2 => 'Khác',
-        ];
+        
         return view('backend.dashboard.layout',compact(
             'template',
             'config',
             'employees',
-            'genderLabels'
         ));
     }
     public function create(){
@@ -59,25 +58,40 @@ class EmployeeController extends Controller
                 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js',
                 'backend/library/location.js'
             ],
-        ];
+        ];  
         $config['seo'] = config('apps.employee');
-        $genderLabels = [
-            0 => 'Nam',
-            1 => 'Nữ',
-            2 => 'Khác',
-        ];
-        $template = 'backend.employee.create';
+        $config['method'] = ' create';
+        $template = 'backend.employee.save';
         return view('backend.dashboard.layout',compact(
             'template',
             'config',
             'provinces',
-            'genderLabels'
         ));
     }
-    public function store(StoreEmployeeRequest $request){
+    public function save(StoreEmployeeRequest $request){
        if($this->employeeService->create($request)){
         return redirect()->route('employee.index')->with('success', 'Thêm mới nhân viên thành công!');
        };
        return redirect()->route('employee.index')->with('error', 'Thêm mới nhân viên không thành công!');
+    }
+    public function edit($id){
+        $employee = $this->employeeRepositories->findById($id);
+        $provinces = $this->provinceRepositories->all();
+        $config = [
+            'css' => ['https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css'],
+            'js' => [
+                'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js',
+                'backend/library/location.js'
+            ],
+        ];
+        $config['seo'] = config('apps.employee');
+        $config['method'] = ' edit';
+        $template = 'backend.employee.save';
+        return view('backend.dashboard.layout',compact(
+            'template',
+            'config',
+            'provinces',
+            'employee',
+        ));
     }
 }

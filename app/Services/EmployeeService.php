@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Config;
 
 /**
  * Class EmployeeService
@@ -33,23 +34,17 @@ class EmployeeService implements EmployeeServiceInterface
         $carbonDate = Carbon::createFromFormat('Y-m-d', $payload['day_of_birth']);
         $payload['day_of_birth'] = $carbonDate->format('Y-m-d H:i:s');
         $payload['password'] = Hash::make($payload['password']);
-        
+        $genderLabels = Config::get('employee.create.genderLabels');
         $gender = $request->input('gender');
-        $genderValue = ($gender == 'male') ? 0 : ($gender == 'female' ? 1 : 2);
-        $genderLabels = [
-            0 => 'Nam',
-            1 => 'Nữ',
-            2 => 'Khác',
-        ];
+        // Kiểm tra nếu giới tính không hợp lệ thì gán giá trị mặc định là 2 (khác)
+        $genderValue = ($gender == 'male') ? 0 : (($gender == 'female') ? 1 : 2);
 
         $payload['gender'] = $genderValue;
-
         // Tiếp tục thêm dữ liệu vào cơ sở dữ liệu
         $employee = $this->employeeRepositories->create($payload);
         DB::commit();
         return [
             'employee' => $employee,
-            'genderLabels' => $genderLabels
         ];
     } catch (\Exception $e) {
         DB::rollBack();

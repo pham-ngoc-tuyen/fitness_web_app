@@ -17,7 +17,8 @@ class EmployeeRepositories extends BaseRepositories implements EmployeeRepositor
     ){
         $this->model = $model;
     }
-    public function getAllPaginate(){
-        return Employee::paginate(15);
+    public function getAllPaginate(int $item = 15){
+        return Employee::paginate($item);
     }
+    
 }

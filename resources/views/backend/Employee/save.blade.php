@@ -10,7 +10,8 @@
     </div>
 @endif
 
-<form action="{{route('employee.store')}}" method="post" class="box">
+{{-- thông báo khi thêm người dùng --}}
+<form action="{{route('employee.save')}}" method="post" class="box">
     @csrf
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
@@ -36,7 +37,7 @@
                                         type="text" 
                                         name="first_name" 
                                         class="form-control" 
-                                        value="{{old('first_name')}}" 
+                                        value="{{old('first_name',($employee->first_name) ?? '')}}" 
                                         placeholder=""
                                         autocomplete="off"
                                     >
@@ -51,45 +52,47 @@
                                         type="text" 
                                         name="last_name" 
                                         class="form-control" 
-                                        value="{{old('last_name')}}" 
+                                        value="{{old('last_name',($employee->last_name) ?? '')}}" 
                                         placeholder=""
                                         autocomplete="off"
                                     >
                                 </div>
                             </div>
                         </div>
-                        <div class="row mb15">
-                            <div class="col-lg-6">
-                                <div class="form-row">
-                                    <label for="" class="control-label text-Left">Mật Khẩu
-                                        <span class="text-danger">(*)</span>
-                                    </label>
-                                    <input 
-                                        type="password" 
-                                        name="password" 
-                                        class="form-control" 
-                                        value="" 
-                                        placeholder=""
-                                        autocomplete="off"
-                                    >
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-row">
-                                    <label for="" class="control-label text-Left">Nhập lại mật khẩu
-                                        <span class="text-danger">(*)</span>
-                                    </label>
-                                    <input 
+                        @if ($config['method'] == 'create')
+                            <div class="row mb15">
+                                <div class="col-lg-6">
+                                    <div class="form-row">
+                                        <label for="" class="control-label text-Left">Mật Khẩu
+                                            <span class="text-danger">(*)</span>
+                                        </label>
+                                        <input 
+                                            type="password" 
+                                            name="password" 
+                                            class="form-control" 
+                                            value="" 
+                                            placeholder=""
+                                            autocomplete="off"
+                                            >
+                                        </div>
+                                    </div>
+                                <div class="col-lg-6">
+                                    <div class="form-row">
+                                        <label for="" class="control-label text-Left">Nhập lại mật khẩu
+                                            <span class="text-danger">(*)</span>
+                                        </label>
+                                        <input 
                                         type="password" 
                                         name="re_password" 
                                         class="form-control" 
                                         value="" 
                                         placeholder=""
                                         autocomplete="off"
-                                    >
+                                        >
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
                         <div class="row mb15">
                                 <div class="col-lg-5">
                                     <div class="form-row">
@@ -100,7 +103,7 @@
                                             type="email" 
                                             name="email" 
                                             class="form-control" 
-                                            value="{{old('email')}}" 
+                                            value="{{old('email',($employee->email) ?? '')}}" 
                                             placeholder=""
                                             autocomplete="off"
                                         >
@@ -114,7 +117,8 @@
                                         type="date" 
                                         name="day_of_birth" 
                                         class="form-control" 
-                                        value="" 
+                                        value="{{old('day_of_birth',($employee->day_of_birth) ?date
+                                        ('Y-m-d', strtotime($employee->day_of_birth)):'' )}}" 
                                         placeholder=""
                                         autocomplete="off"
                                     >
@@ -123,21 +127,17 @@
                             <div class="col-lg-2">
                                 <div class="form-row">
                                     <label class="control-label text-Left">Giới tính</label>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gender" id="male" value="male">
-                                        <label class="form-check-label" for="male">Nam</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gender" id="female" value="female">
-                                        <label class="form-check-label" for="female">Nữ</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gender" id="unknown" value="unknown">
-                                        <label class="form-check-label" for="unknown">Khác</label>
-                                    </div>
+                                    <select class="form-control" name="gender">
+                                        @if(isset($config['employee']['create']['genderLabels']))
+                                            @foreach ($config['employee']['create']['genderLabels'] as $value => $label)
+                                                <option value="{{ $value }}" {{ old('gender', $employee->gender) == $value ? 'selected' : '' }}>
+                                                    {{ $label }}
+                                                </option>
+                                            @endforeach
+                                        @endif
+                                    </select>
                                 </div>
                             </div>
-                            
                             
                         </div>
                         <div class="row mb15">
@@ -149,7 +149,7 @@
                                         type="text" 
                                         name="avatar" 
                                         class="form-control" 
-                                        value="{{old('avatar')}}" 
+                                        value="{{old('avatar',($employee->avatar) ?? '')}}" 
                                         placeholder=""
                                         autocomplete="off"
                                     >
@@ -174,14 +174,14 @@
                         <div class="row mb15">
                             <div class="col-lg-6">
                                 <div class="form-row">
-                                    <label for="" class="control-label text-Left">Thành phố
+                                    <label for="" class="control-label text-Left">Tỉnh/Thành phố
                                     </label>
-                                   <Select name="provide_id" class="form-control setupSelect2 province location" data-target="districts">
-                                        <option value="0">[Chọn thành phố]</option>
-                                        @if (@isset($provinces))
-                                            @foreach ($provinces as $province)
-                                            <option value="{{$province->code}}">
-                                                {{$province->name}}</option>
+                                   <Select name="province_id" class="form-control setupSelect2 province location" data-target="districts">
+                                        <option value="0">[Chọn Tỉnh/Thành phố]</option>
+                                        @if(isset($provinces))
+                                            @foreach($provinces as $province)
+                                            <option @if(old('province_id') == $province->code) selected 
+                                            @endif value="{{ $province->code }}">{{ $province->name }}</option>
                                             @endforeach
                                         @endif
                                    </Select>
@@ -214,7 +214,7 @@
                                     </label>
                                     <input type="text" 
                                             name="address"
-                                            value="{{old('address')}}"
+                                            value="{{old('address',($employee->address) ?? '')}}" 
                                             class="form-control"
                                             placeholder=""
                                             autocomplete="off" 
@@ -232,7 +232,7 @@
                                     </div>
                                     <input type="text" 
                                             name="phone_number"
-                                            value="{{old('phone_number')}}"
+                                            value="{{old('phone_number',($employee->phone_number) ?? '')}}" 
                                             class="form-control"
                                             placeholder=""
                                             autocomplete="off" 
@@ -251,3 +251,8 @@
         </div>
     </div>
 </form>
+<script>
+    var province_id = '{{old('province_id')}}'
+    var district_id = '{{old('district_id')}}'
+    var ward_id = '{{old('ward_id')}}'
+</script>
